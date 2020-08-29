@@ -66,7 +66,6 @@ class Layer:
             Implementing backward propogation through this layer
 
             dA_pres : change in cost function with respect to activations of current layer
-            Z_pres : Linear Activation them Non-linear activation is applied based activation type of the current layer
 
         """
         m = dA_pres.shape[-1]
@@ -75,6 +74,14 @@ class Layer:
             db = np.sum(dA_pres, axis=1, keepdims=True) * 1 / m
             dW = np.dot(dA_pres, self.prev_activations.T) * 1 / m
             dA_prev = np.dot(self.weights.T, dA_pres)
+        
+        elif self.activation == "relu":
+            dZ = dA_pres.copy()
+            Z_pres = np.dot(self.weights, self.prev_activations) + self.bias
+            dZ[Z_pres <= 0] = 0
+            dW = np.dot(dZ, self.prev_activations.T) * 1 / m
+            db = np.sum(dZ, axis=1, keepdims=True) * 1 / m
+            dA_prev = np.dot(self.weights.T, dZ)
         
         return dW, dA_prev, db
     
@@ -128,7 +135,6 @@ class NN_model:
         for epoch in range(epochs):
 
             A_pres = X_train
-
             for l in range(self.num_layers):
                 A_pres = self.layers["layer" + str(l + 1)].forward_prop(A_pres)
 
