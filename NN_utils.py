@@ -83,6 +83,11 @@ class Layer:
             db = np.sum(dZ, axis=1, keepdims=True) * 1 / m
             dA_prev = np.dot(self.weights.T, dZ)
         
+        elif self.activation == "sigmoid":
+            dZ = np.multiply(np.multiply(self.pres_activations, 1 - self.pres_activations), dA_pres)
+            dW = np.dot(dZ, self.prev_activations.T) * 1 / m
+            db = np.sum(dZ, axis=1, keepdims=True) * 1 / m
+            dA_prev = np.dot(self.weights.T, dZ)
         return dW, dA_prev, db
     
 
@@ -94,6 +99,7 @@ class Layer:
         """
         self.weights -= learning_rate * dW
         self.bias -= learning_rate * db
+
     
 
 # NN_model class for Neural Network
@@ -106,7 +112,7 @@ class NN_model:
 
             input_size : size of a training example
             layers : Layers which are to be used in sequence (Class of layer must be Layer)
-            loss_type : type of loss you want to use ("mse", "log_loss", ---)
+            loss_type : type of loss you want to use ("mse", "binary_crossentropy", ---)
             num_layers : Number of layers in Neural Network (Not compulsary)
 
         """
@@ -144,6 +150,9 @@ class NN_model:
                 dW, dA, db = self.layers["layer" + str(l)].backward_prop(dA)
                 
                 self.layers["layer" + str(l)].update_parameters(dW, db, learning_rate)
+
+        train_loss, train_accuracy = self.compute_loss_acc(A_pres, Y_train)
+        print("Total training loss : {0} and accuracy on training set : {1}".format(train_loss, train_accuracy))
                        
 
 
@@ -152,14 +161,36 @@ class NN_model:
 
         for l in range(self.num_layers):
             A0 = self.layers["layer" + str(l + 1)].forward_prop(A0)
-
+        
         return A0
+
+
+    # Computing training loss and accuracy at the end of training
+    def compute_loss_acc(self, Y_pred, Y_true):
+        
+        if self.loss.loss_type == "binary_crossentropy":
+            loss = np.squeeze(-1 * np.sum(np.add(np.multiply(1 - Y_true, np.log(1 - Y_pred)), np.multiply(Y_true, np.log(Y_pred))), axis=1))
+            Y_pred_round = np.round(Y_pred, 0)
+            accuracy, m = 0, len(Y_true)
+            for i in range(m):
+                if Y_true[i] == Y_pred_round[0][i]:
+                    accuracy += 1
+        return loss / m, accuracy / m
 
 
     # TO get summary (details) of the model
     def summary(self):
+        
         for l in range(self.num_layers):
             print(self.layers["layer" + str(l + 1)].units, self.layers["layer" + str(l + 1)].weights, self.layers["layer" + str(l + 1)].bias)
+
+
+    # To Evaluate model on validation data
+    def evaluate(self, X, Y):
+
+        Y_pred = self.predict(X)
+        loss, accuracy = self.compute_loss_acc(Y_pred, Y)
+        print("Loss : {0} and Accuracy : {1}".format(np.round(loss, 5), accuracy))
     
         
 
@@ -171,4 +202,6 @@ class Loss:
     def back_prop(self, y_pred, y_true):
         if self.loss_type == "mse":
             dA = 2 * (y_pred - y_true)
+        elif self.loss_type == "binary_crossentropy":
+            dA = np.divide(y_pred - y_true, y_pred - np.power(y_pred, 2))
         return dA
