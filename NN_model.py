@@ -1,3 +1,5 @@
+# Author : V I S H W A S [https://github.com/vstark21]
+
 import numpy as np
 from Loss import *
 from Layer import *

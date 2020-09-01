@@ -1,3 +1,5 @@
+# Author : V I S H W A S [https://github.com/vstark21]
+
 import numpy as np
 
 # Loss helper class used in neural network

@@ -55,3 +55,5 @@ Finally, to view the details of network,
 ```
 
 **Note**: No other libraries are used except <code>numpy</code> for vectorization and <code>sys</code> for printing the progress bar everything is implemented from scratch :v:
+
+:copyright:<a href="https://github.com/vstark21"><small> V I S H W A S</small></a>

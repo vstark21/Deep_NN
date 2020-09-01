@@ -1,3 +1,5 @@
+# Author : V I S H W A S [https://github.com/vstark21]
+
 import sys
 
 # Progress Bar class to output the progress
