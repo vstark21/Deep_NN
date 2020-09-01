@@ -1,5 +1,5 @@
 # Deep_NN
-Deep Neural Network implemented in **Python** from scratch :)
+Deep Neural Network implemented in **Python** from scratch :smile:
 <br>
 This currently supports:
 - **Deep Neural Networks** with fully connected layers and non-linearities
@@ -37,14 +37,20 @@ to print loss after each epoch.
 
 Now lets fit the network,
 
-    3_layer_NN.fit(X, Y, epochs=1000, learning_rate=0.01)
-    
+```python
+3_layer_NN.fit(X, Y, epochs=1000, learning_rate=0.01)
+```
+
 So to predict and evaluate on some examples,
 
-    prediction = 3_layer_NN.predict(example)
-    3_layer_NN.evaluate(X_val, Y_val)
-    
+```python
+prediction = 3_layer_NN.predict(example)
+3_layer_NN.evaluate(X_val, Y_val)
+```
+
 Finally, to view the details of network.
-    
-    3_layer_NN.summary()
+
+```python    
+3_layer_NN.summary()
+```
     
