@@ -6,16 +6,16 @@ This currently supports:
 - **Classification** (Logistic and softmax) and **Regression** (L2)
 - Uses **Gradient Descent** optimizer
 
-### Modules
+## Modules
 This actually contains four Modules:
-- Layer
-- Loss
-- NN_model
-- ProgressBar
+- [Layer](https://github.com/vstark21/Deep_NN/blob/master/Layer.py)
+- [Loss](https://github.com/vstark21/Deep_NN/blob/master/Loss.py)
+- [NN_model](https://github.com/vstark21/Deep_NN/blob/master/NN_model.py)
+- [ProgressBar](https://github.com/vstark21/Deep_NN/blob/master/ProgressBar.py)
 
 Each of these above mentioned Modules contains a class whose name is same as module name
 
-### Example Code
+## Example Code
 Lets create a **3-layer Neural Network** (two Hidden layers and a output layer)
 
 ```python
@@ -48,9 +48,10 @@ prediction = 3_layer_NN.predict(example)
 3_layer_NN.evaluate(X_val, Y_val)
 ```
 
-Finally, to view the details of network.
+Finally, to view the details of network,
 
 ```python    
 3_layer_NN.summary()
 ```
-    
+
+**Note**: No other libraries are used except <code>numpy</code> for vectorization and <code>sys</code> for printing the progress bar ecverything is implemented from scratch :v:
