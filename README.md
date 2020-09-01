@@ -2,9 +2,9 @@
 Deep Neural Network implemented in **Python** from scratch :smile:
 <br>
 This currently supports:
-- **Deep Neural Networks** with fully connected layers and non-linearities
-- **Classification** (Logistic and softmax) and **Regression** (L2)
-- Uses **Gradient Descent** optimizer
+- **Deep Neural Networks** with fully connected layers and non-linearities.
+- **Classification** (Logistic and softmax) and **Regression** (L2).
+- Uses **Batch Gradient Descent** optimizer.
 
 ## Modules
 This actually contains four Modules:
@@ -54,4 +54,4 @@ Finally, to view the details of network,
 3_layer_NN.summary()
 ```
 
-**Note**: No other libraries are used except <code>numpy</code> for vectorization and <code>sys</code> for printing the progress bar ecverything is implemented from scratch :v:
+**Note**: No other libraries are used except <code>numpy</code> for vectorization and <code>sys</code> for printing the progress bar everything is implemented from scratch :v:
