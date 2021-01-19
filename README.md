@@ -3,7 +3,7 @@ Deep Neural Network implemented in **Python** from scratch :smile:
 <br>
 This currently supports:
 - **Deep Neural Networks** with fully connected layers and non-linearities.
-- **Classification** (Logistic and softmax) and **Regression** (L2).
+- **Classification** (*Logistic and softmax*) and **Regression** (L2).
 - Uses **Batch Gradient Descent** optimizer.
 
 ## Modules
